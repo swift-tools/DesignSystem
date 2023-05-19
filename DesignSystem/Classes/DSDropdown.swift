@@ -164,7 +164,7 @@ import UIKit
         placeholderLabel.textColor = borderColor
         placeholderLabel.isHidden = indexForSelectedItem == nil
         placeholderLabelLeadingConstraint?.constant = horizontalSpacing
-        placeholderLabelTrailingConstraint?.constant = -(horizontalSpacing + 16)
+        placeholderLabelTrailingConstraint?.constant = -horizontalSpacing
         
         dropdownTableView.layer.borderColor = borderColor.cgColor
         dropdownTableView.layer.borderWidth = borderWidth
@@ -197,7 +197,7 @@ import UIKit
         
         rightImageTraillingConstraint = rightImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalSpacing)
         placeholderLabelLeadingConstraint = placeholderLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontalSpacing)
-        placeholderLabelTrailingConstraint = placeholderLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -(horizontalSpacing + 16))
+        placeholderLabelTrailingConstraint = placeholderLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -horizontalSpacing)
         
         NSLayoutConstraint.activate([
             button.topAnchor.constraint(equalTo: topAnchor),
