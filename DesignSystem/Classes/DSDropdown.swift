@@ -139,7 +139,7 @@ import UIKit
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        updateLayout()
+        performLayoutSubviews()
     }
 }
 
@@ -191,7 +191,7 @@ extension DSDropdown {
         
     }
     
-    private func updateLayout() {
+    private func performLayoutSubviews() {
         layer.cornerRadius = cornerRadius
         
         let titleColor = indexForSelectedItem == nil ? placeholderColor : textColor
