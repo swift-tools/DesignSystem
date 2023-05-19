@@ -14,7 +14,6 @@ import UIKit
     @objc optional func dropdown(_ dropdown: DSDropdown, didDeselectItemAt index: Int)
 }
 
-// FIXME: No selecciona item cuando la vista tiene un UITapGestureRecognizer (probar dentro de UITableView o UICollectionView)
 @IBDesignable open class DSDropdown: UIView {
     
     @IBInspectable public var borderWidth: CGFloat = 0 {
@@ -66,6 +65,26 @@ import UIKit
     
     @IBOutlet open weak var delegate: DSDropdownDelegate?
     
+    // MARK: - Properties
+    
+    private var borderColor: UIColor = .black
+    
+    private var title: String = ""
+    
+    private var isDropdownOpen = false {
+        didSet { setNeedsLayout() }
+    }
+    
+    private(set) public var indexForSelectedItem: Int? {
+        didSet { setNeedsLayout() }
+    }
+    
+    private var placeholderLabelLeadingConstraint: NSLayoutConstraint?
+    
+    private var placeholderLabelTrailingConstraint: NSLayoutConstraint?
+    
+    private var rightImageTraillingConstraint: NSLayoutConstraint?
+    
     // MARK: - UI
     
     private lazy var button: UIButton = {
@@ -92,7 +111,7 @@ import UIKit
         if #available(iOS 13.0, *) {
             imageView.image = UIImage(systemName: "chevron.down")
         } else {
-            // TODO: Fallback on earlier versions
+            // FIXME: Fallback on earlier versions
         }
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -106,27 +125,7 @@ import UIKit
         return label
     }()
     
-    // MARK: - Properties
-    
-    private var borderColor: UIColor = .black
-    
-    private var title: String = ""
-    
-    private var isDropdownOpen = false {
-        didSet { setNeedsLayout() }
-    }
-    
-    private(set) public var indexForSelectedItem: Int? {
-        didSet { setNeedsLayout() }
-    }
-    
-    private var placeholderLabelLeadingConstraint: NSLayoutConstraint?
-    
-    private var placeholderLabelTrailingConstraint: NSLayoutConstraint?
-    
-    private var rightImageTraillingConstraint: NSLayoutConstraint?
-    
-    // MARK: - Initialize
+    // MARK: - Life Cycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -140,6 +139,59 @@ import UIKit
     
     open override func layoutSubviews() {
         super.layoutSubviews()
+        updateLayout()
+    }
+}
+
+// MARK: - Public Methods
+
+extension DSDropdown {
+    
+    public func selectItem(at index: Int) {
+        indexForSelectedItem = index
+        delegate?.dropdown(self, didSelectItemAt: index)
+    }
+    
+    public func deselectItem() {
+        if let indexForSelectedItem = indexForSelectedItem {
+            delegate?.dropdown?(self, didDeselectItemAt: indexForSelectedItem)
+        }
+        indexForSelectedItem = nil
+    }
+}
+
+// MARK: - Private Methods
+    
+extension DSDropdown {
+    
+    private func setupUI() {
+        addSubview(button)
+        addSubview(rightImage)
+        addSubview(placeholderLabel)
+        
+        button.addTarget(self, action: #selector(dropdownButtonTapped), for: .touchUpInside)
+        
+        rightImageTraillingConstraint = rightImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalSpacing)
+        placeholderLabelLeadingConstraint = placeholderLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontalSpacing)
+        placeholderLabelTrailingConstraint = placeholderLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -horizontalSpacing)
+        
+        NSLayoutConstraint.activate([
+            button.topAnchor.constraint(equalTo: topAnchor),
+            button.leadingAnchor.constraint(equalTo: leadingAnchor),
+            button.trailingAnchor.constraint(equalTo: trailingAnchor),
+            button.heightAnchor.constraint(equalTo: heightAnchor),
+            rightImage.centerYAnchor.constraint(equalTo: centerYAnchor),
+            rightImage.widthAnchor.constraint(equalToConstant: 16),
+            placeholderLabel.centerYAnchor.constraint(equalTo: topAnchor),
+        ])
+        
+        rightImageTraillingConstraint?.isActive = true
+        placeholderLabelLeadingConstraint?.isActive = true
+        placeholderLabelTrailingConstraint?.isActive = true
+        
+    }
+    
+    private func updateLayout() {
         layer.cornerRadius = cornerRadius
         
         let titleColor = indexForSelectedItem == nil ? placeholderColor : textColor
@@ -172,47 +224,6 @@ import UIKit
         
         rightImage.tintColor = placeholderColor
         rightImageTraillingConstraint?.constant = -horizontalSpacing
-    }
-    
-    // MARK: - Methods
-    
-    public func selectItem(at index: Int) {
-        indexForSelectedItem = index
-        delegate?.dropdown(self, didSelectItemAt: index)
-    }
-    
-    public func deselectItem() {
-        if let indexForSelectedItem = indexForSelectedItem {
-            delegate?.dropdown?(self, didDeselectItemAt: indexForSelectedItem)
-        }
-        indexForSelectedItem = nil
-    }
-    
-    private func setupUI() {
-        addSubview(button)
-        addSubview(rightImage)
-        addSubview(placeholderLabel)
-        
-        button.addTarget(self, action: #selector(dropdownButtonTapped), for: .touchUpInside)
-        
-        rightImageTraillingConstraint = rightImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalSpacing)
-        placeholderLabelLeadingConstraint = placeholderLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontalSpacing)
-        placeholderLabelTrailingConstraint = placeholderLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -horizontalSpacing)
-        
-        NSLayoutConstraint.activate([
-            button.topAnchor.constraint(equalTo: topAnchor),
-            button.leadingAnchor.constraint(equalTo: leadingAnchor),
-            button.trailingAnchor.constraint(equalTo: trailingAnchor),
-            button.heightAnchor.constraint(equalTo: heightAnchor),
-            rightImage.centerYAnchor.constraint(equalTo: centerYAnchor),
-            rightImage.widthAnchor.constraint(equalToConstant: 16),
-            placeholderLabel.centerYAnchor.constraint(equalTo: topAnchor),
-        ])
-        
-        rightImageTraillingConstraint?.isActive = true
-        placeholderLabelLeadingConstraint?.isActive = true
-        placeholderLabelTrailingConstraint?.isActive = true
-        
     }
     
     @objc private func dropdownButtonTapped() {
@@ -290,6 +301,8 @@ import UIKit
         })
     }
 }
+
+// MARK: - UITableViewDelegate, UITableViewDataSource
 
 extension DSDropdown: UITableViewDelegate, UITableViewDataSource {
     

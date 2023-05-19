@@ -126,7 +126,7 @@
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="wO7-bH-hHq">
+                <tapGestureRecognizer cancelsTouchesInView="NO" id="wO7-bH-hHq">
                     <connections>
                         <action selector="hideKeyboard:" destination="vXZ-lx-hvc" id="37G-gt-H1f"/>
                     </connections>
