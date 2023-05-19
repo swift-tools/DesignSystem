@@ -11,6 +11,7 @@ import DesignSystem
 
 class ViewController: UIViewController {
     @IBOutlet private weak var dropdown: DSDropdown!
+    @IBOutlet private weak var textField: DSTextField!
     
     private let items = ["DNI", "CE"]
 
