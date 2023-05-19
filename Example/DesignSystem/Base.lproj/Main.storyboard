@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="R6e-yr-OhK">
-                                <rect key="frame" x="24" y="16" width="327" height="100.5"/>
+                                <rect key="frame" x="24" y="16" width="327" height="239"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iOS Design System" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rhk-Es-NPo">
                                         <rect key="frame" x="0.0" y="0.0" width="327" height="20.5"/>
@@ -28,21 +28,18 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dR5-84-EJc" customClass="DSDropdown" customModule="DesignSystem">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tch-I1-oU3" customClass="DSDropdown" customModule="DesignSystem">
                                         <rect key="frame" x="0.0" y="44.5" width="327" height="56"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="56" id="Pcw-JS-jRC"/>
+                                            <constraint firstAttribute="height" constant="56" id="OOp-k4-PLi"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                 <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="6"/>
-                                            </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="normalColor">
-                                                <color key="value" red="0.56078431370000004" green="0.55294117649999996" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="focusedColor">
                                                 <color key="value" red="0.15686274510000001" green="0.70588235290000001" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -51,86 +48,96 @@
                                                 <color key="value" red="0.10980392160000001" green="0.1058823529" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                <color key="value" red="0.56078431370000004" green="0.55294117649999996" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="font" value="Arial Bold"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="font" value="Avenir Heavy"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
                                                 <real key="value" value="16"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Tipo de documento"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="horizontalSpacing">
+                                                <real key="value" value="16"/>
+                                            </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="maxItems">
                                                 <integer key="value" value="3"/>
                                             </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="allowDeselect" value="NO"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="allowDeselect" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="delegate" destination="vXZ-lx-hvc" id="8jh-pu-uw7"/>
+                                            <outlet property="parentView" destination="kh9-bI-dsS" id="k0j-LK-PdE"/>
+                                        </connections>
+                                    </view>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Número de documento" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VlX-C9-CCD" customClass="DSTextField" customModule="DesignSystem">
+                                        <rect key="frame" x="0.0" y="124.5" width="327" height="56"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" red="0.56078431370000004" green="0.55294117649999996" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="56" id="50k-9C-PKB"/>
+                                        </constraints>
+                                        <color key="textColor" red="0.10980392160000001" green="0.1058823529" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="normalColor">
+                                                <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="focusedColor">
+                                                <color key="value" red="0.15686274510000001" green="0.70588235290000001" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="horizontalSpacing">
                                                 <real key="value" value="16"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4bo-Aa-Tny">
+                                        <rect key="frame" x="0.0" y="204.5" width="327" height="34.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Continuar"/>
                                         <connections>
-                                            <outlet property="delegate" destination="vXZ-lx-hvc" id="VZS-J0-leG"/>
-                                            <outlet property="parentView" destination="kh9-bI-dsS" id="nxc-oO-r6U"/>
+                                            <action selector="hideKeyboard:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="FB8-oq-oTY"/>
                                         </connections>
-                                    </view>
+                                    </button>
                                 </subviews>
                             </stackView>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Número de documento" adjustsFontSizeToFit="NO" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="Nvd-JM-yps" customClass="DSTextField" customModule="DesignSystem">
-                                <rect key="frame" x="24" y="140.5" width="327" height="56"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="n5Q-9y-vYz"/>
-                                </constraints>
-                                <color key="textColor" red="0.10980392160000001" green="0.1058823529" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="16"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="6"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="normalColor">
-                                        <color key="value" red="0.56078431370000004" green="0.55294117649999996" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="focusedColor">
-                                        <color key="value" red="0.15686274510000001" green="0.70588235290000001" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                        <color key="value" red="0.10980392160000001" green="0.1058823529" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" red="0.56078431370000004" green="0.55294117649999996" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="horizontalSpacing">
-                                        <real key="value" value="16"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="R6e-yr-OhK" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="24" id="S6p-5V-1AV"/>
-                            <constraint firstItem="Nvd-JM-yps" firstAttribute="top" secondItem="R6e-yr-OhK" secondAttribute="bottom" constant="24" id="U5e-dw-gkS"/>
-                            <constraint firstItem="Nvd-JM-yps" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="24" id="awR-hd-akh"/>
-                            <constraint firstAttribute="trailing" secondItem="Nvd-JM-yps" secondAttribute="trailing" constant="24" id="itl-Cc-GWj"/>
                             <constraint firstAttribute="trailing" secondItem="R6e-yr-OhK" secondAttribute="trailing" constant="24" id="lGV-cO-Smd"/>
                             <constraint firstItem="R6e-yr-OhK" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="16" id="nyY-4D-OxT"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="wO7-bH-hHq" appends="YES" id="SlO-nU-Q9e"/>
+                        </connections>
                     </view>
-                    <connections>
-                        <outlet property="dropdown" destination="dR5-84-EJc" id="G3a-tU-fME"/>
-                        <outlet property="textField" destination="Nvd-JM-yps" id="y2I-Wi-QAf"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="wO7-bH-hHq">
+                    <connections>
+                        <action selector="hideKeyboard:" destination="vXZ-lx-hvc" id="37G-gt-H1f"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="133.59999999999999" y="-31.03448275862069"/>
         </scene>
     </scenes>
     <designables>
-        <designable name="Nvd-JM-yps">
-            <size key="intrinsicContentSize" width="206.5" height="19.5"/>
+        <designable name="VlX-C9-CCD">
+            <size key="intrinsicContentSize" width="206.5" height="23.5"/>
         </designable>
     </designables>
 </document>

@@ -29,9 +29,13 @@ import UIKit
         didSet { setNeedsLayout() }
     }
     
+    // FIXME: Da problemas si usamos imagenes del sistema (crashea Storyboard)
+    @IBInspectable public var rightImage: UIImage? = nil {
+        didSet { setNeedsLayout(); awakeFromNib() }
+    }
+    
     @IBInspectable public var horizontalSpacing: CGFloat = 0 {
-        didSet { setNeedsLayout()
-            awakeFromNib() }
+        didSet { setNeedsLayout(); awakeFromNib() }
     }
     
     // MARK: - UI
@@ -42,6 +46,13 @@ import UIKit
         label.isHidden = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    private lazy var rightButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle(nil, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     // MARK: - Initialize
@@ -80,6 +91,8 @@ import UIKit
             placeholderLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -horizontalSpacing),
             placeholderLabel.centerYAnchor.constraint(equalTo: topAnchor)
         ])
+        
+        rightButton.setImage(rightImage, for: .normal)
     }
     
     open override func awakeFromNib() {
@@ -95,11 +108,23 @@ import UIKit
             .font: font ?? .systemFont(ofSize: UIFont.systemFontSize),
             .foregroundColor: placeholderColor
         ])
-        
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: horizontalSpacing, height: frame.height))
+
+        let paddingView = UIView()
+
+        if rightImage == nil {
+            paddingView.frame = CGRect(x: 0, y: 0, width: horizontalSpacing, height: frame.height)
+        } else {
+            paddingView.addSubview(rightButton)
+            rightButton.leadingAnchor.constraint(equalTo: paddingView.leadingAnchor, constant: 6).isActive = true
+            // FIXME: si cambia el horizontalSpacing se actualiza esto?
+            rightButton.trailingAnchor.constraint(equalTo: paddingView.trailingAnchor, constant: -horizontalSpacing).isActive = true
+            rightButton.centerYAnchor.constraint(equalTo: paddingView.centerYAnchor).isActive = true
+        }
+
         rightView = paddingView
         rightViewMode = .always
-        leftView = paddingView
+
+        leftView = UIView(frame: CGRect(x: 0, y: 0, width: horizontalSpacing, height: frame.height))
         leftViewMode = .always
     }
     

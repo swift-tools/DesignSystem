@@ -23,6 +23,10 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction private func hideKeyboard(_ sender: Any) {
+        self.view.endEditing(true)
+    }
 
 }
 
