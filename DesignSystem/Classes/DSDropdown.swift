@@ -14,6 +14,7 @@ import UIKit
     @objc optional func dropdown(_ dropdown: DSDropdown, didDeselectItemAt index: Int)
 }
 
+// FIXME: No selecciona item cuando la vista tiene un UITapGestureRecognizer (probar dentro de UITableView o UICollectionView)
 @IBDesignable open class DSDropdown: UIView {
     
     @IBInspectable public var borderWidth: CGFloat = 0 {
