@@ -7,6 +7,10 @@
 
 import UIKit
 
+@objc public protocol DSTextFieldDelegate: NSObjectProtocol {
+    func textField(_ textField: UITextField, didSelectRightButton rightButton: UIButton)
+}
+
 @IBDesignable open class DSTextField: UITextField {
     
     @IBInspectable public var borderWidth: CGFloat = 0 {
@@ -45,6 +49,8 @@ import UIKit
     private var placeholderLabelLeadingConstraint: NSLayoutConstraint?
     
     private var placeholderLabelTrailingConstraint: NSLayoutConstraint?
+    
+    @IBOutlet open weak var textFieldDelegate: DSTextFieldDelegate?
     
     // MARK: - UI
     
@@ -93,6 +99,7 @@ extension DSTextField {
     private func setupUI() {
         addTarget(self, action: #selector(textFieldDidBeginEditing), for: .editingDidBegin)
         addTarget(self, action: #selector(textFieldDidEndEditing), for: .editingDidEnd)
+        rightButton.addTarget(self, action: #selector(rightButtonTapped), for: .touchUpInside)
     }
     
     private func performLayoutSubviews() {
@@ -158,5 +165,9 @@ extension DSTextField {
     
     @objc private func textFieldDidEndEditing() {
         setNeedsLayout()
+    }
+    
+    @objc private func rightButtonTapped(_ sender: UIButton) {
+        textFieldDelegate?.textField(self, didSelectRightButton: sender)
     }
 }
