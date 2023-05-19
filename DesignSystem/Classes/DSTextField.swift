@@ -38,6 +38,14 @@ import UIKit
         didSet { setNeedsLayout(); awakeFromNib() }
     }
     
+    // MARK: - Properties
+    
+    private var borderColor: UIColor = .black
+    
+    private var placeholderLabelLeadingConstraint: NSLayoutConstraint?
+    
+    private var placeholderLabelTrailingConstraint: NSLayoutConstraint?
+    
     // MARK: - UI
     
     private lazy var placeholderLabel: UILabel = {
@@ -55,7 +63,7 @@ import UIKit
         return button
     }()
     
-    // MARK: - Initialize
+    // MARK: - Life Cycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,7 +77,25 @@ import UIKit
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        
+        performLayoutSubviews()
+    }
+    
+    open override func awakeFromNib() {
+        super.awakeFromNib()
+        performAwakeFromNib()
+    }
+}
+
+// MARK: - Methods
+
+extension DSTextField {
+    
+    private func setupUI() {
+        addTarget(self, action: #selector(textFieldDidBeginEditing), for: .editingDidBegin)
+        addTarget(self, action: #selector(textFieldDidEndEditing), for: .editingDidEnd)
+    }
+    
+    private func performLayoutSubviews() {
         borderColor = isFirstResponder ? focusedColor : normalColor
         
         borderStyle = .none
@@ -95,9 +121,7 @@ import UIKit
         rightButton.setImage(rightImage, for: .normal)
     }
     
-    open override func awakeFromNib() {
-        super.awakeFromNib()
-        
+    private func performAwakeFromNib() {
         let placeholderText = placeholder ?? ""
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.headIndent = horizontalSpacing
@@ -126,21 +150,6 @@ import UIKit
 
         leftView = UIView(frame: CGRect(x: 0, y: 0, width: horizontalSpacing, height: frame.height))
         leftViewMode = .always
-    }
-    
-    // MARK: - Properties
-    
-    private var borderColor: UIColor = .black
-    
-    private var placeholderLabelLeadingConstraint: NSLayoutConstraint?
-    
-    private var placeholderLabelTrailingConstraint: NSLayoutConstraint?
-    
-    // MARK: - Methods
-    
-    private func setupUI() {
-        addTarget(self, action: #selector(textFieldDidBeginEditing), for: .editingDidBegin)
-        addTarget(self, action: #selector(textFieldDidEndEditing), for: .editingDidEnd)
     }
     
     @objc private func textFieldDidBeginEditing() {
