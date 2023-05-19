@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="R6e-yr-OhK">
-                                <rect key="frame" x="24" y="16" width="327" height="239"/>
+                                <rect key="frame" x="24" y="16" width="327" height="297"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iOS Design System" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rhk-Es-NPo">
                                         <rect key="frame" x="0.0" y="0.0" width="327" height="20.5"/>
@@ -65,6 +65,7 @@
                                                 <integer key="value" value="3"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="allowDeselect" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="rightImage" value="ic.chevron.down"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="delegate" destination="vXZ-lx-hvc" id="8jh-pu-uw7"/>
@@ -106,8 +107,13 @@
                                             <outlet property="textFieldDelegate" destination="vXZ-lx-hvc" id="qnj-IF-ye7"/>
                                         </connections>
                                     </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="99v-Al-CHe">
+                                        <rect key="frame" x="0.0" y="204.5" width="327" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4bo-Aa-Tny">
-                                        <rect key="frame" x="0.0" y="204.5" width="327" height="34.5"/>
+                                        <rect key="frame" x="0.0" y="262.5" width="327" height="34.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Continuar"/>
                                         <connections>
@@ -149,6 +155,7 @@
         </designable>
     </designables>
     <resources>
+        <image name="ic.chevron.down" width="16" height="16"/>
         <image name="ic.info" width="34" height="34"/>
     </resources>
 </document>

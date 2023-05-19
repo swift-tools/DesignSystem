@@ -56,6 +56,10 @@ import UIKit
         didSet { setNeedsLayout() }
     }
     
+    @IBInspectable public var rightImage: UIImage? = nil {
+        didSet { setNeedsLayout() }
+    }
+    
     @IBInspectable public var maxItems: Int = 3
     
     @IBInspectable public var allowDeselect: Bool = false
@@ -106,13 +110,8 @@ import UIKit
         return tableView
     }()
     
-    private lazy var rightImage: UIImageView = {
+    private lazy var rightImageView: UIImageView = {
         let imageView = UIImageView()
-        if #available(iOS 13.0, *) {
-            imageView.image = UIImage(systemName: "chevron.down")
-        } else {
-            // FIXME: Fallback on earlier versions
-        }
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -166,12 +165,12 @@ extension DSDropdown {
     
     private func setupUI() {
         addSubview(button)
-        addSubview(rightImage)
+        addSubview(rightImageView)
         addSubview(placeholderLabel)
         
         button.addTarget(self, action: #selector(dropdownButtonTapped), for: .touchUpInside)
         
-        rightImageTraillingConstraint = rightImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalSpacing)
+        rightImageTraillingConstraint = rightImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalSpacing)
         placeholderLabelLeadingConstraint = placeholderLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontalSpacing)
         placeholderLabelTrailingConstraint = placeholderLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -horizontalSpacing)
         
@@ -180,15 +179,13 @@ extension DSDropdown {
             button.leadingAnchor.constraint(equalTo: leadingAnchor),
             button.trailingAnchor.constraint(equalTo: trailingAnchor),
             button.heightAnchor.constraint(equalTo: heightAnchor),
-            rightImage.centerYAnchor.constraint(equalTo: centerYAnchor),
-            rightImage.widthAnchor.constraint(equalToConstant: 16),
+            rightImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             placeholderLabel.centerYAnchor.constraint(equalTo: topAnchor),
         ])
         
         rightImageTraillingConstraint?.isActive = true
         placeholderLabelLeadingConstraint?.isActive = true
         placeholderLabelTrailingConstraint?.isActive = true
-        
     }
     
     private func performLayoutSubviews() {
@@ -222,7 +219,8 @@ extension DSDropdown {
         dropdownTableView.layer.borderWidth = borderWidth
         dropdownTableView.layer.cornerRadius = cornerRadius
         
-        rightImage.tintColor = placeholderColor
+        rightImageView.image = rightImage
+        rightImageView.tintColor = placeholderColor
         rightImageTraillingConstraint?.constant = -horizontalSpacing
     }
     
@@ -285,7 +283,7 @@ extension DSDropdown {
     private func renderTableView(show: Bool) {
         dropdownTableView.alpha = show ? 1 : 0
         dropdownTableView.transform = show ? .identity : CGAffineTransform(translationX: 0, y: -40).scaledBy(x: 1, y: 0.1)
-        rightImage.transform = show ? CGAffineTransform(rotationAngle: .pi): .identity
+        rightImageView.transform = show ? CGAffineTransform(rotationAngle: .pi): .identity
     }
     
     private func animate(_ animations: @escaping () -> Void, completion: (() -> Void)? = nil) {
