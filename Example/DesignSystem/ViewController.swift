@@ -43,3 +43,10 @@ extension ViewController: DSDropdownDelegate {
         print(items[index])
     }
 }
+
+extension ViewController: DSTextFieldDelegate {
+    
+    func textField(_ textField: UITextField, didSelectRightButton rightButton: UIButton) {
+        print(rightButton)
+    }
+}

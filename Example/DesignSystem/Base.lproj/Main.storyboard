@@ -74,7 +74,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Número de documento" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VlX-C9-CCD" customClass="DSTextField" customModule="DesignSystem">
                                         <rect key="frame" x="0.0" y="124.5" width="327" height="56"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" red="0.56078431370000004" green="0.55294117649999996" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="56" id="50k-9C-PKB"/>
                                         </constraints>
@@ -100,7 +100,11 @@
                                             <userDefinedRuntimeAttribute type="number" keyPath="horizontalSpacing">
                                                 <real key="value" value="16"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="rightImage" value="ic.info"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="textFieldDelegate" destination="vXZ-lx-hvc" id="qnj-IF-ye7"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4bo-Aa-Tny">
                                         <rect key="frame" x="0.0" y="204.5" width="327" height="34.5"/>
@@ -124,6 +128,10 @@
                             <outletCollection property="gestureRecognizers" destination="wO7-bH-hHq" appends="YES" id="SlO-nU-Q9e"/>
                         </connections>
                     </view>
+                    <connections>
+                        <outlet property="dropdown" destination="tch-I1-oU3" id="BUK-nr-enL"/>
+                        <outlet property="textField" destination="VlX-C9-CCD" id="2bF-FU-Qky"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer cancelsTouchesInView="NO" id="wO7-bH-hHq">
@@ -137,7 +145,10 @@
     </scenes>
     <designables>
         <designable name="VlX-C9-CCD">
-            <size key="intrinsicContentSize" width="206.5" height="23.5"/>
+            <size key="intrinsicContentSize" width="246.5" height="23.5"/>
         </designable>
     </designables>
+    <resources>
+        <image name="ic.info" width="34" height="34"/>
+    </resources>
 </document>

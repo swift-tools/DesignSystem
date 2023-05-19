@@ -33,7 +33,6 @@ import UIKit
         didSet { setNeedsLayout() }
     }
     
-    // FIXME: Da problemas si usamos imagenes del sistema (crashea Storyboard)
     @IBInspectable public var rightImage: UIImage? = nil {
         didSet { setNeedsLayout(); awakeFromNib() }
     }
@@ -45,10 +44,6 @@ import UIKit
     // MARK: - Properties
     
     private var borderColor: UIColor = .black
-    
-    private var placeholderLabelLeadingConstraint: NSLayoutConstraint?
-    
-    private var placeholderLabelTrailingConstraint: NSLayoutConstraint?
     
     @IBOutlet open weak var textFieldDelegate: DSTextFieldDelegate?
     
@@ -114,9 +109,8 @@ extension DSTextField {
         placeholderLabel.text = placeholder
         placeholderLabel.textColor = borderColor
         placeholderLabel.isHidden = text?.isEmpty ?? true
-        placeholderLabelLeadingConstraint?.constant = horizontalSpacing
-        placeholderLabelTrailingConstraint?.constant = -horizontalSpacing
         
+        placeholderLabel.removeFromSuperview()
         superview?.insertSubview(placeholderLabel, aboveSubview: self)
         
         NSLayoutConstraint.activate([
@@ -147,7 +141,6 @@ extension DSTextField {
         } else {
             paddingView.addSubview(rightButton)
             rightButton.leadingAnchor.constraint(equalTo: paddingView.leadingAnchor, constant: 6).isActive = true
-            // FIXME: si cambia el horizontalSpacing se actualiza esto?
             rightButton.trailingAnchor.constraint(equalTo: paddingView.trailingAnchor, constant: -horizontalSpacing).isActive = true
             rightButton.centerYAnchor.constraint(equalTo: paddingView.centerYAnchor).isActive = true
         }
