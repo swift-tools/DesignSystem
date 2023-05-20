@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DesignSystem'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of DesignSystem.'
+  s.version          = '1.0.0'
+  s.summary          = 'Swift Tools Design System.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -21,11 +21,11 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/lazymisu/DesignSystem'
+  s.homepage         = 'https://github.com/swift-tools/DesignSystem'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'lazymisu' => 'felix.chacaltana.felix@gmail.com' }
-  s.source           = { :git => 'https://github.com/lazymisu/DesignSystem.git', :tag => s.version.to_s }
+  s.author           = { 'lazymisu' => '' }
+  s.source           = { :git => 'https://github.com/swift-tools/DesignSystem.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '12.0'
