@@ -27,13 +27,13 @@ Then, run `pod install` to fetch the framework and include it in your project.
 
 All components provided by DesignSystem are highly customizable. They can be customized either through storyboards or programmatically to suit your application's specific requirements.
 
-- `DSDropdown`: Ready-to-use floating dropdown element that can be easily integrated into your user interface. It provides a visually appealing way to present a selection of options to the user.
+[Xcode storyboard](DesignSystem/Assets/xcode-storyboard.png)
 
-<!--![Example Dropdown](example.png)-->
+- `DSDropdown`: Ready-to-use floating dropdown element that can be easily integrated into your user interface. It provides a visually appealing way to present a selection of options to the user.
 
 - `DSTextField`: Base text field component. It offers a range of visual properties that can be customized, such as `borderColor`, `borderWidth`, `cornerRadius`, and more.
 
-<!--![Example TextField](example.png)-->
+[Components in simulator](DesignSystem/Assets/components-simulator.png)
 
 ## 📖 Usage
 
