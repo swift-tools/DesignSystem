@@ -16,53 +16,53 @@ import UIKit
 
 @IBDesignable open class DSDropdown: UIView {
     
-    @IBInspectable public var borderWidth: CGFloat = 0 {
+    @IBInspectable open var borderWidth: CGFloat = 0 {
         didSet{ setNeedsLayout() }
     }
     
-    @IBInspectable public var cornerRadius: CGFloat = 0 {
+    @IBInspectable open var cornerRadius: CGFloat = 0 {
         didSet { setNeedsLayout() }
     }
     
-    @IBInspectable public var normalColor: UIColor = .black {
+    @IBInspectable open var normalColor: UIColor = .black {
         didSet { setNeedsLayout() }
     }
     
-    @IBInspectable public var focusedColor: UIColor = .black {
+    @IBInspectable open var focusedColor: UIColor = .black {
         didSet { setNeedsLayout() }
     }
     
-    @IBInspectable public var textColor: UIColor = .black {
+    @IBInspectable open var textColor: UIColor = .black {
         didSet { setNeedsLayout() }
     }
     
-    @IBInspectable public var placeholderColor: UIColor = .black {
+    @IBInspectable open var placeholderColor: UIColor = .black {
         didSet { setNeedsLayout() }
     }
     
-    @IBInspectable public var font: String = "System" {
+    @IBInspectable open var font: String = "System" {
         didSet { setNeedsLayout() }
     }
     
-    @IBInspectable public var fontSize: CGFloat = 14 {
+    @IBInspectable open var fontSize: CGFloat = 14 {
         didSet { setNeedsLayout() }
     }
     
-    @IBInspectable public var placeholder: String = "" {
+    @IBInspectable open var placeholder: String = "" {
         didSet { setNeedsLayout() }
     }
     
-    @IBInspectable public var horizontalSpacing: CGFloat = 0 {
+    @IBInspectable open var horizontalSpacing: CGFloat = 0 {
         didSet { setNeedsLayout() }
     }
     
-    @IBInspectable public var rightImage: UIImage? = nil {
+    @IBInspectable open var rightImage: UIImage? = nil {
         didSet { setNeedsLayout() }
     }
     
-    @IBInspectable public var maxItems: Int = 3
+    @IBInspectable open var maxItems: Int = 3
     
-    @IBInspectable public var allowDeselect: Bool = false
+    @IBInspectable open var allowDeselect: Bool = false
     
     /// For default should be the ViewController's `view`. Use the `scrollView` as long as the component is inside it.
     @IBOutlet public weak var parentView: UIView?
@@ -91,7 +91,7 @@ import UIKit
     
     // MARK: - UI
     
-    private lazy var button: UIButton = {
+    private lazy var dropdownButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = backgroundColor
         button.tintColor = .clear
@@ -126,17 +126,17 @@ import UIKit
     
     // MARK: - Life Cycle
     
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupUI()
     }
     
-    open override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         performLayoutSubviews()
     }
@@ -164,21 +164,21 @@ extension DSDropdown {
 extension DSDropdown {
     
     private func setupUI() {
-        addSubview(button)
+        addSubview(dropdownButton)
         addSubview(rightImageView)
         addSubview(placeholderLabel)
         
-        button.addTarget(self, action: #selector(dropdownButtonTapped), for: .touchUpInside)
+        dropdownButton.addTarget(self, action: #selector(dropdownButtonTapped), for: .touchUpInside)
         
         rightImageTraillingConstraint = rightImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalSpacing)
         placeholderLabelLeadingConstraint = placeholderLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontalSpacing)
         placeholderLabelTrailingConstraint = placeholderLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -horizontalSpacing)
         
         NSLayoutConstraint.activate([
-            button.topAnchor.constraint(equalTo: topAnchor),
-            button.leadingAnchor.constraint(equalTo: leadingAnchor),
-            button.trailingAnchor.constraint(equalTo: trailingAnchor),
-            button.heightAnchor.constraint(equalTo: heightAnchor),
+            dropdownButton.topAnchor.constraint(equalTo: topAnchor),
+            dropdownButton.leadingAnchor.constraint(equalTo: leadingAnchor),
+            dropdownButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            dropdownButton.heightAnchor.constraint(equalTo: heightAnchor),
             rightImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             placeholderLabel.centerYAnchor.constraint(equalTo: topAnchor),
         ])
@@ -200,13 +200,13 @@ extension DSDropdown {
             title = placeholder
         }
         
-        button.setTitleColor(titleColor, for: .normal)
-        button.titleLabel?.font = UIFont(name: font, size: fontSize) ?? .systemFont(ofSize: fontSize)
-        button.layer.borderColor = borderColor.cgColor
-        button.layer.borderWidth = borderWidth
-        button.layer.cornerRadius = cornerRadius
-        button.setTitle(title, for: .normal)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: horizontalSpacing + 16)
+        dropdownButton.setTitleColor(titleColor, for: .normal)
+        dropdownButton.titleLabel?.font = UIFont(name: font, size: fontSize) ?? .systemFont(ofSize: fontSize)
+        dropdownButton.layer.borderColor = borderColor.cgColor
+        dropdownButton.layer.borderWidth = borderWidth
+        dropdownButton.layer.cornerRadius = cornerRadius
+        dropdownButton.setTitle(title, for: .normal)
+        dropdownButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: horizontalSpacing + 16)
         
         placeholderLabel.font = UIFont(name: font, size: 12) ?? .systemFont(ofSize: 12)
         placeholderLabel.text = placeholder
@@ -236,7 +236,7 @@ extension DSDropdown {
         
         parentView?.addSubview(dropdownTableView)
         
-        dropdownTableView.topAnchor.constraint(equalTo: button.bottomAnchor, constant: -1).isActive = true
+        dropdownTableView.topAnchor.constraint(equalTo: dropdownButton.bottomAnchor, constant: -1).isActive = true
         dropdownTableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         dropdownTableView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         
