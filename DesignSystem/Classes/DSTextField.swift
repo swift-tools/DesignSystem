@@ -13,31 +13,31 @@ import UIKit
 
 @IBDesignable open class DSTextField: UITextField {
     
-    @IBInspectable public var borderWidth: CGFloat = 0 {
+    @IBInspectable open var borderWidth: CGFloat = 0 {
         didSet{ setNeedsLayout() }
     }
     
-    @IBInspectable public var cornerRadius: CGFloat = 0 {
+    @IBInspectable open var cornerRadius: CGFloat = 0 {
         didSet { setNeedsLayout() }
     }
     
-    @IBInspectable public var normalColor: UIColor = .black {
+    @IBInspectable open var normalColor: UIColor = .black {
         didSet { setNeedsLayout() }
     }
     
-    @IBInspectable public var focusedColor: UIColor = .black {
+    @IBInspectable open var focusedColor: UIColor = .black {
         didSet { setNeedsLayout() }
     }
     
-    @IBInspectable public var placeholderColor: UIColor = .black {
+    @IBInspectable open var placeholderColor: UIColor = .black {
         didSet { setNeedsLayout() }
     }
     
-    @IBInspectable public var rightImage: UIImage? = nil {
+    @IBInspectable open var rightImage: UIImage? = nil {
         didSet { setNeedsLayout(); awakeFromNib() }
     }
     
-    @IBInspectable public var horizontalSpacing: CGFloat = 0 {
+    @IBInspectable open var horizontalSpacing: CGFloat = 0 {
         didSet { setNeedsLayout(); awakeFromNib() }
     }
     
@@ -45,7 +45,7 @@ import UIKit
     
     private var borderColor: UIColor = .black
     
-    @IBOutlet open weak var textFieldDelegate: DSTextFieldDelegate?
+    @IBOutlet weak open var textFieldDelegate: DSTextFieldDelegate?
     
     // MARK: - UI
     
@@ -66,7 +66,7 @@ import UIKit
     
     // MARK: - Life Cycle
     
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
     }
@@ -76,12 +76,12 @@ import UIKit
         setupUI()
     }
     
-    open override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         performLayoutSubviews()
     }
     
-    open override func awakeFromNib() {
+    public override func awakeFromNib() {
         super.awakeFromNib()
         performAwakeFromNib()
     }
