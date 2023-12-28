@@ -12,8 +12,10 @@ import DesignSystem
 class ViewController: UIViewController {
     @IBOutlet private weak var dropdown: DSDropdown!
     @IBOutlet private weak var textField: DSTextField!
+    @IBOutlet private weak var textFieldEmail: UITextField!
     
     private let items = ["DNI", "CE"]
+    private let domains = ["gmail.com", "hotmail.com",  "yahoo.com", "outlook.com", "yahoo.es", "icloud.com"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,5 +50,20 @@ extension ViewController: DSTextFieldDelegate {
     
     func textField(_ textField: UITextField, didSelectRightButton rightButton: UIButton) {
         print(rightButton)
+    }
+}
+
+extension ViewController: DSEmailCompletionDelegate {
+    
+    func numberOfDomains(in emailCompletion: DSEmailCompletion) -> Int {
+        return domains.count
+    }
+    
+    func emailCompletion(_ emailCompletion: DSEmailCompletion, titleForDomainAt index: Int) -> String {
+        return domains[index]
+    }
+    
+    func emailCompletion(_ emailCompletion: DSEmailCompletion, didSelectDomainAt index: Int) {
+        textFieldEmail.text?.append(domains[index])
     }
 }
