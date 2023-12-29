@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -141,7 +142,6 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="textFieldDidChange:" destination="2uR-gb-WeC" eventType="editingChanged" id="MO4-oU-UY2"/>
                                                     <outlet property="textFieldDelegate" destination="vXZ-lx-hvc" id="h83-Fv-KGd"/>
                                                 </connections>
                                             </textField>
@@ -191,6 +191,7 @@
                                         <connections>
                                             <outlet property="delegate" destination="vXZ-lx-hvc" id="QH4-ms-7hh"/>
                                             <outlet property="parentView" destination="kh9-bI-dsS" id="bDX-EV-ekR"/>
+                                            <outlet property="textField" destination="dYG-lv-Tnw" id="NGz-7m-yaG"/>
                                         </connections>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4bo-Aa-Tny">
@@ -219,7 +220,6 @@
                     <connections>
                         <outlet property="dropdown" destination="tch-I1-oU3" id="BUK-nr-enL"/>
                         <outlet property="textField" destination="VlX-C9-CCD" id="4YE-IC-GlR"/>
-                        <outlet property="textFieldEmail" destination="dYG-lv-Tnw" id="aXq-cD-AVa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

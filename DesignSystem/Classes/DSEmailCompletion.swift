@@ -10,7 +10,7 @@ import UIKit
 @objc public protocol DSEmailCompletionDelegate: NSObjectProtocol {
     func numberOfDomains(in emailCompletion: DSEmailCompletion) -> Int
     func emailCompletion(_ emailCompletion: DSEmailCompletion, titleForDomainAt index: Int) -> String
-    func emailCompletion(_ emailCompletion: DSEmailCompletion, didSelectDomainAt index: Int)
+    @objc optional func emailCompletion(_ emailCompletion: DSEmailCompletion, didSelectDomainAt index: Int, forTextField textField: UITextField)
 }
 
 @IBDesignable open class DSEmailCompletion: UIView {
@@ -53,6 +53,8 @@ import UIKit
     
     @IBInspectable open var maxItems: Int = 3
     
+    @IBOutlet public weak var textField: UITextField!
+    
     /// For default should be the ViewController's `view`. Use the `scrollView` as long as the component is inside it.
     @IBOutlet public weak var parentView: UIView?
     
@@ -63,9 +65,7 @@ import UIKit
     private var isDropdownOpen = false {
         didSet { setNeedsLayout() }
     }
-    
-    private var text: String = ""
-    
+   
     // MARK: - UI
     
     private lazy var dropdownTableView: UITableView = {
@@ -79,38 +79,25 @@ import UIKit
     
     // MARK: - Life Cycle
     
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
     public override func layoutSubviews() {
         super.layoutSubviews()
         performLayoutSubviews()
-    }
-}
-
-// MARK: - Public Methods
-
-extension DSEmailCompletion {
-    
-    @IBAction private func textFieldDidChange(_ sender: UITextField) {
-        text = sender.text ?? ""
-
-        if let text = sender.text, let firstIndex = text.firstIndex(of: "@"), firstIndex == text.index(before: text.endIndex) {
-            showDropdownTableView()
-        } else {
-            hideDropdownTableView()
-        }
+        textField.addTarget(self, action: #selector(textFieldEditingChanged), for: .editingChanged)
     }
 }
 
 // MARK: - Private Methods
     
 extension DSEmailCompletion {
+    
+    @objc private func textFieldEditingChanged(_ sender: UITextField) {
+        
+        if let text = sender.text, let firstIndex = text.firstIndex(of: "@"), firstIndex == text.index(before: text.endIndex) {
+            showDropdownTableView()
+        } else {
+            hideDropdownTableView()
+        }
+    }
     
     private func performLayoutSubviews() {
         layer.cornerRadius = cornerRadius
@@ -205,7 +192,7 @@ extension DSEmailCompletion: UITableViewDelegate, UITableViewDataSource {
         let attributedString = NSMutableAttributedString()
         let textFont = UIFont(name: textFont, size: fontSize) ?? .systemFont(ofSize: fontSize)
         let domainFont = UIFont(name: domainFont, size: fontSize) ?? .boldSystemFont(ofSize: fontSize)
-        attributedString.append(NSAttributedString(string: text, attributes: [.font: textFont, .foregroundColor: textColor]))
+        attributedString.append(NSAttributedString(string: textField.text ?? "", attributes: [.font: textFont, .foregroundColor: textColor]))
         attributedString.append(NSAttributedString(string: domain, attributes: [.font: domainFont, .foregroundColor: domainColor]))
         cell.textLabel?.attributedText = attributedString
         cell.backgroundColor = backgroundColor
@@ -219,6 +206,8 @@ extension DSEmailCompletion: UITableViewDelegate, UITableViewDataSource {
         isDropdownOpen = false
         hideDropdownTableView()
         tableView.scrollToRow(at: indexPath, at: .top, animated: false)
-        delegate?.emailCompletion(self, didSelectDomainAt: indexPath.row)
+        let domain = self.delegate?.emailCompletion(self, titleForDomainAt: indexPath.row) ?? ""
+        textField.text?.append(domain)
+        delegate?.emailCompletion?(self, didSelectDomainAt: indexPath.row, forTextField: textField)
     }
 }
